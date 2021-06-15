@@ -236,8 +236,9 @@ class Api(object):
         }
 
         starting_date_str = starting_date.strftime("%Y-%m-%d")
+        end_days = calendar_months * 30
         ending_date_str = (
-            starting_date + datetime.timedelta(days=30)).strftime("%Y-%m-%d")
+            starting_date + datetime.timedelta(days=end_days)).strftime("%Y-%m-%d")
 
         r = self._session.get(API_URL + "/calendars/{}/{}/{}".format(
             str(listing_id), starting_date_str, ending_date_str), params=params)
@@ -346,7 +347,6 @@ class Api(object):
             'version': '1.4.8',
             'section_offset': '0',
             'items_offset': str(offset),
-            'adults': '0',
             'screen_size': 'small',
             'source': 'explore_tabs',
             'items_per_grid': str(items_per_grid),
